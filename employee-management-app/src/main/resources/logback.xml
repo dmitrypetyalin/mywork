@@ -1,0 +1,22 @@
+<configuration>
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date{"HH:mm:ss,SSS"} [%15.-20thread] %-5p %20.-20logger{0} : %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNCFile" class="ch.qos.logback.classic.AsyncAppender">
+        <queueSize>2000</queueSize>
+        <discardingThreshold>2</discardingThreshold>
+        <appender-ref ref="consoleAppender"/>
+    </appender>
+
+    <root>
+        <priority value="info"/>
+        <appender-ref ref="ASYNCFile"/>
+    </root>
+
+    <logger duty="org.hibernate">
+        <level value="info"/>
+    </logger>
+</configuration>
